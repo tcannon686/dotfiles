@@ -1,7 +1,9 @@
 
 source $VIMRUNTIME/vimrc_example.vim
 
-set nobackup
+set backupdir=.vim/,~/.vim/,/tmp//
+set directory=.vim/,~/.vim/,/tmp//
+set undodir=.vim/,~/.vim/,/tmp//
 
 set textwidth=80
 set expandtab
@@ -15,3 +17,4 @@ map gC :s/\(^\s*\)\zs\(\)\=/ <Left><Left><Left><Left><Left><Left>
 
 "mouse"
 set ttymouse=xterm2
+set mouse=a
