@@ -20,8 +20,9 @@ Plugin 'https://tpope.io/vim/surround.git'
 " UltiSnips
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Vim Wiki
-Plugin 'vimwiki/vimwiki'
+" Targets.vim
+Plugin 'http://github.com/wellle/targets.vim.git'
+Plugin 'https://github.com/MaxMEllon/vim-jsx-pretty.git'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -65,13 +66,15 @@ set textwidth=80
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set guioptions-=T
+set guioptions=!a
 set nohlsearch
 set spelllang=en
 set autoindent
 
+au BufNewFile,BufRead *.launch set filetype=xml
 au BufNewFile,BufRead *.sdf set filetype=xml
 
+au FileType css setlocal tabstop=2 | setlocal shiftwidth=2
 au FileType javascript setlocal tabstop=2 | setlocal shiftwidth=2
 au FileType typescript setlocal tabstop=2 | setlocal shiftwidth=2
 au FileType html setlocal tabstop=2 | setlocal shiftwidth=2
@@ -85,6 +88,9 @@ augroup tex_mappings
             \ <buffer> <silent> a$ :<c-u>normal! F$vf$<cr>
     au FileType tex,latex,plaintex vnoremap <buffer> i$ T$ot$
     au FileType tex,latex,plaintex vnoremap <buffer> a$ F$of$
+    au FileType tex,latex,plaintex setlocal nocindent
+    au FileType tex,latex,plaintex setlocal nosmartindent
+    au FileType tex,latex,plaintex setlocal indentexpr=
 augroup end
 
 " Mouse settings
@@ -107,6 +113,8 @@ nnoremap <leader>T vato<ESC>
 nnoremap <leader>m c<C-r>=<C-r>"<CR><ESC>
 vnoremap <leader>m c<C-r>=<C-r>"<CR><ESC>
 
+nnoremap <leader>c :!ctags -R<CR>
+
 " UltiSnips config
 let g:UltiSnipsListSnippets="<c-l>"
 
@@ -114,6 +122,9 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsEditSplit="horizontal"
 
 let g:livepreview_cursorhold_recompile=0
+
+set fillchars+=vert:\ ,fold:-
+set complete+=k
 
 filetype off
 set runtimepath+=~/lilypond/usr/share/lilypond/current/vim/
